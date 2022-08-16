@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import UserA from './UserA';
 import UserB from './UserB';
 import Waiting from './Waiting'
@@ -9,18 +9,18 @@ let components = {
 };
 
 let renderCount = 0;
-let effectCount = 0;
 const DynamicComponent = (props) => {
+	const [oData, changeOData] = useState(null);
 	const data = "This is my useful data";
 
-	renderCount++
-	props.fn(`renderCount = ${renderCount}`);
+	renderCount++;
+	console.log(`renderCount = ${renderCount}`);
 
 	useEffect(() => {
-		effectCount++;
-		props.fn(`effectCount = ${effectCount}`);
+		props.fn("test", changeOData);
+		console.log(`other data = ${oData}`);
 		props.cb(data);
-	});
+	}, [props, oData]);
 
 	const SelectedUser = props.user !== "" ? components[props.user] : Waiting;
 	return (<SelectedUser />);

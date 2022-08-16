@@ -35,10 +35,8 @@ const App = (props) => {
 		}
 	}
 
-	const otherFunction = (text) => {
-		if (text !== "") {
-			console.log(text);
-		}
+	const otherFunction = (data, fn) => {
+		fn(data);
 	}
 
 	return (
